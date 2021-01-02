@@ -12,7 +12,7 @@ ctx.closePath();
 const ball = {
     x: 100,
     y: 300,
-    vx: -5,
+    vx: -4,
     vy: -2,
     radius: 10,
     color: 'pink',
@@ -31,18 +31,24 @@ const ball = {
     ball.x += ball.vx;
     ball.y += ball.vy;
 
-    if(ball.y +ball.vy < 0) {
+    if(ball.y + ball.vy >canvas.height) {
+        alert('You lose!')
+        document.location.reload();
+        clearInterval(interval);
+    }
+
+    //To do: add a box that pops up with the message, not the alert, allow to clear and start over
+
+    if(ball.y +ball.vy < ball.radius) {
         ball.vy = -ball.vy;
     }
-    if(ball.x + ball.vx > canvas.width || ball.x +ball.vx < 0) {
+    if(ball.x + ball.vx > canvas.width-ball.radius || ball.x +ball.vx < ball.radius) {
         ball.vx = -ball.vx;
-    }
+    } 
 
     animation = window.requestAnimationFrame(draw);
 
-    if(ball.y + ball.dy > canvas.height) {
-        alert('The game has ended!');
-    }
+    
   }
   
   canvas.addEventListener('click', function(e) {
