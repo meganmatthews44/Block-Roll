@@ -1,5 +1,6 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+let animation;
 
 ctx.beginPath();
 ctx.rect(20, 40, 50, 25);
@@ -28,11 +29,19 @@ const ball = {
     ball.draw();
     ball.x += ball.vx;
     ball.y += ball.vy;
-    raf = window.requestAnimationFrame(draw);
+
+    if(ball.y + ball.vy > canvas.height || ball.y +ball.vy < 0) {
+        ball.vy = -ball.vy;
+    }
+    if(ball.x + ball.vx > canvas.width || ball.x +ball.vx < 0) {
+        ball.vx = -ball.vx;
+    }
+
+    animation = window.requestAnimationFrame(draw);
   }
   
   canvas.addEventListener('click', function(e) {
-    raf = window.requestAnimationFrame(draw);
+    animation = window.requestAnimationFrame(draw);
   });
 
   
