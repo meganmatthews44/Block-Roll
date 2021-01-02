@@ -1,10 +1,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let animation;
+running = false;
 
 ctx.beginPath();
 ctx.rect(20, 40, 50, 25);
-ctx.fillStyle = "red";
+ctx.fillStyle = "lightblue";
 ctx.fill();
 ctx.closePath();
 
@@ -14,7 +15,7 @@ const ball = {
     vx: 5,
     vy: 2,
     radius: 10,
-    color: 'blue',
+    color: 'pink',
     draw: function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -41,7 +42,10 @@ const ball = {
   }
   
   canvas.addEventListener('click', function(e) {
+    if (!running) { 
     animation = window.requestAnimationFrame(draw);
+    running = true;
+    }
   });
 
   
