@@ -2,8 +2,6 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let animation;
 let running = false;
-let right = false;
-let left = false;
 
 const block = {
     x: 20,
@@ -64,7 +62,6 @@ const ball = {
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
     block.draw();
-    
     ball.draw();
     paddle.draw();
     ball.x += ball.vx;
@@ -86,28 +83,19 @@ const ball = {
         ball.vx = -ball.vx;
     } 
 
+    if (paddle.x <= 0) {
+        paddle.x = 0
+    }
+    if (paddle.x >= (canvas.width-paddle.width)) {
+        paddle.x = (canvas.width-paddle.width)
+    }
+
     animation = window.requestAnimationFrame(draw);
     
     
   };
 
   
-   /* document.addEventListener('keydown', keyDown, false);
-   document.addEventListener('keyup', keyUp, false);
-
-   const keyDown = function(e) {
-     if(e.key == "Right" || e.key == "ArrowRight") {
-         right = true;
-         console.log('right clicked')
-     }
-   };
-
-   const keyUp = function(e) {
-     if(e.key == "Left" || e.key == "ArrowLeft") {
-         left = true;
-         console.log('left clicked')
-     }
-   };  */
 
    window.addEventListener("keydown", function (event) {
     if (event.defaultPrevented) {
@@ -117,12 +105,10 @@ const ball = {
     switch (event.key) {
       
       case "ArrowLeft":
-        console.log('arrow left pressed')
-    
+        paddle.x -= 10
         break;
       case "ArrowRight":
-        console.log('arrow right pressed')
-
+        paddle.x += 10
         break;
       
       default:
@@ -132,7 +118,6 @@ const ball = {
     event.preventDefault();
   }, true);
 
-  
   
   canvas.addEventListener('click', function(e) {
     if (!running) { 
