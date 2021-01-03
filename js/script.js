@@ -3,33 +3,68 @@ const ctx = canvas.getContext("2d");
 let animation;
 running = false;
 
-ctx.beginPath();
-ctx.rect(20, 40, 50, 25);
-ctx.fillStyle = "lightblue";
-ctx.fill();
-ctx.closePath();
+const block = {
+    x: 20,
+    y: 40,
+    width: 50,
+    height: 25,
+    color: "lightblue",
+    draw: function() {
+        ctx.beginPath();
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
+block.draw();
+
 
 const ball = {
     x: 100,
     y: 300,
-    vx: -4,
+    vx: -1,
     vy: -2,
     radius: 10,
     color: 'pink',
     draw: function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      ctx.closePath();
       ctx.fillStyle = this.color;
       ctx.fill();
+      ctx.closePath();
     }
   };
 
+   const paddle = {
+       height: 10,
+       width: 50,
+       x: 250,
+       y: 325,
+       color: 'lightgreen',
+       draw: function() {
+           ctx.beginPath();
+           ctx.rect(this.x, this.y, this.width, this.height);
+           ctx.fillStyle = this.color;
+           ctx.fill();
+           ctx.closePath();
+           
+       }
+
+   };
+
+   paddle.draw();
+
+
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
+    block.draw();
     ball.draw();
+    paddle.draw();
     ball.x += ball.vx;
     ball.y += ball.vy;
+
 
     if(ball.y + ball.vy >canvas.height) {
         alert('You lose!')
