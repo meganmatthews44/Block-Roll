@@ -2,10 +2,11 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let animation;
 let running = false;
+const score = document.getElementById("score")
 
 const block = {
-    x: 20,
-    y: 40,
+    x: 200,
+    y: 200,
     width: 50,
     height: 25,
     color: "lightblue",
@@ -90,10 +91,15 @@ const ball = {
         paddle.x = (canvas.width-paddle.width)
     }
 
-    if (ball.y === (paddle.y - ball.radius) && (ball.x >= paddle.x) && (ball.x <= (paddle.x +paddle.width)))  {
-        console.log('collision detected')
+    if (ball.y === (paddle.y - ball.radius) && (ball.x >= paddle.x) && (ball.x <= (paddle.x + paddle.width)))  {
         paddle.color = 'red'
         ball.vy = -ball.vy
+    }
+
+    if ((ball.y <= block.y + block.height + ball.radius && ball.y >= block.y - ball.radius) && ball.x >= block.x && ball.x <= block.x + block.width){
+        block.color = 'red'
+        ball.vy = -ball.vy
+        
     }
 
     animation = window.requestAnimationFrame(draw);
