@@ -24,8 +24,8 @@ block.draw();
 
 
 const ball = {
-    x: 260,
-    y: 300,
+    x: 350,
+    y: 315,
     vx: -1,
     vy: -2,
     radius: 10,
@@ -42,7 +42,7 @@ const ball = {
    const paddle = {
        height: 10,
        width: 50,
-       x: 250,
+       x: 350,
        y: 325,
        color: 'lightgreen',
        draw: function() {
@@ -76,7 +76,7 @@ const ball = {
 
     //To do: add a box that pops up with the message, not the alert, allow to clear and start over
 
-    if(ball.y +ball.vy < ball.radius) {
+    if(ball.y + ball.vy < ball.radius) {
         ball.vy = -ball.vy;
     }
     if(ball.x + ball.vx > canvas.width-ball.radius || ball.x +ball.vx < ball.radius) {
@@ -88,6 +88,12 @@ const ball = {
     }
     if (paddle.x >= (canvas.width-paddle.width)) {
         paddle.x = (canvas.width-paddle.width)
+    }
+
+    if (ball.y === (paddle.y - ball.radius) && (ball.x >= paddle.x) && (ball.x <= (paddle.x +paddle.width)))  {
+        console.log('collision detected')
+        paddle.color = 'red'
+        ball.vy = -ball.vy
     }
 
     animation = window.requestAnimationFrame(draw);
