@@ -6,3 +6,16 @@
     background-color: black;
 }
 
+#title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#click {
+    margin-bottom: 20px;
+}
+
+#score {
+    margin-top: 50px;
+    font-size: 30px;
+}

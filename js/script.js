@@ -1,7 +1,9 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let animation;
-running = false;
+let running = false;
+let right = false;
+let left = false;
 
 const block = {
     x: 20,
@@ -21,8 +23,10 @@ const block = {
 block.draw();
 
 
+
+
 const ball = {
-    x: 100,
+    x: 260,
     y: 300,
     vx: -1,
     vy: -2,
@@ -60,13 +64,14 @@ const ball = {
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
     block.draw();
+    
     ball.draw();
     paddle.draw();
     ball.x += ball.vx;
     ball.y += ball.vy;
 
 
-    if(ball.y + ball.vy >canvas.height) {
+    if(ball.y + ball.vy > canvas.height) {
         alert('You lose!')
         document.location.reload();
         clearInterval(interval);
@@ -82,9 +87,52 @@ const ball = {
     } 
 
     animation = window.requestAnimationFrame(draw);
-
     
-  }
+    
+  };
+
+  
+   /* document.addEventListener('keydown', keyDown, false);
+   document.addEventListener('keyup', keyUp, false);
+
+   const keyDown = function(e) {
+     if(e.key == "Right" || e.key == "ArrowRight") {
+         right = true;
+         console.log('right clicked')
+     }
+   };
+
+   const keyUp = function(e) {
+     if(e.key == "Left" || e.key == "ArrowLeft") {
+         left = true;
+         console.log('left clicked')
+     }
+   };  */
+
+   window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+      return; // Do nothing if the event was already processed
+    }
+  
+    switch (event.key) {
+      
+      case "ArrowLeft":
+        console.log('arrow left pressed')
+    
+        break;
+      case "ArrowRight":
+        console.log('arrow right pressed')
+
+        break;
+      
+      default:
+        return;
+    }
+  
+    event.preventDefault();
+  }, true);
+
+  
   
   canvas.addEventListener('click', function(e) {
     if (!running) { 
