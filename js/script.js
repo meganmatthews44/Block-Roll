@@ -2,7 +2,8 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let animation;
 let running = false;
-const score = document.getElementById("score")
+const scoreboard = document.getElementById("score")
+let score = 0
 
 const block = {
     x: 200,
@@ -20,8 +21,6 @@ const block = {
 }
 
 block.draw();
-
-
 
 
 const ball = {
@@ -67,6 +66,7 @@ const ball = {
     paddle.draw();
     ball.x += ball.vx;
     ball.y += ball.vy;
+    scoreboard.innerText = (`${score}`)
 
 
     if(ball.y + ball.vy > canvas.height) {
@@ -92,13 +92,16 @@ const ball = {
     }
 
     if (ball.y === (paddle.y - ball.radius) && (ball.x >= paddle.x) && (ball.x <= (paddle.x + paddle.width)))  {
-        paddle.color = 'red'
         ball.vy = -ball.vy
     }
 
     if ((ball.y <= block.y + block.height + ball.radius && ball.y >= block.y - ball.radius) && ball.x >= block.x && ball.x <= block.x + block.width){
-        block.color = 'red'
+
         ball.vy = -ball.vy
+        block.width = 0
+        block.height = 0
+        score+=1
+        scoreboard.innerText = (`${score}`)
         
     }
 
