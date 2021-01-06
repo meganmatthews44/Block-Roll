@@ -4,24 +4,58 @@ let animation;
 let running = false;
 const scoreboard = document.getElementById("score")
 let score = 0
+const rowCount = 4
+const columnCount = 6
+let blockWidth = 55
+let blockHeight = 25
+const blockPadding = 20
+const blockTop = 40
+const blockLeft = 40
+let blockX;
+let blockY;
 
-const block = {
-    x: 200,
-    y: 200,
-    width: 50,
-    height: 25,
-    color: "lightblue",
-    draw: function() {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
+let blocks = [];
+for(let c = 0; c < columnCount; c++) {
+    blocks[c] = [];
+    for (let r = 0; r < rowCount; r++) {
+        blocks[c][r] = {x: 0, y: 0, status: 1};
     }
 }
 
-block.draw();
+const drawBricks = function() {
+    for(let c = 0; c < columnCount; c++) {
+        for(let r = 0; r < rowCount; r++) {
+            if(blocks[c][r].status == 1) {
+                blockX = (c * (blockWidth + blockPadding)) +blockLeft;
+                blockY = (r * (blockHeight + blockPadding)) +blockTop;
+                blocks[c][r].x = 0;
+                blocks[c][r].y = 0;
+                ctx.beginPath();
+                ctx.rect(blockX, blockY, blockWidth, blockHeight);
+                ctx.fillStyle = "lightblue";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+}
 
+const eraseBlocks = function() {
+    for (let c = 0; c < columnCount; c++) {
+        for (let r = 0; r < rowCount; r++) { 
+            let b = blocks[c][r]  
+            if (b.status == 1) {
+                if ((ball.y <= blockY + blockHeight + ball.radius && ball.y >= blockY - ball.radius) && ball.x >= blockX && ball.x <= blockX + blockWidth){
+
+                ball.vy = -ball.vy
+                b.status = 0;
+                score+=1
+                scoreboard.innerText = (`${score}`)
+                }
+            }
+        }
+    }
+  };
 
 const ball = {
     x: 350,
@@ -43,7 +77,7 @@ const ball = {
        height: 10,
        width: 50,
        x: 350,
-       y: 325,
+       y: 325, // does not change
        color: 'lightgreen',
        draw: function() {
            ctx.beginPath();
@@ -61,9 +95,10 @@ const ball = {
 
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    block.draw();
+    drawBricks();
     ball.draw();
     paddle.draw();
+    eraseBlocks();
     ball.x += ball.vx;
     ball.y += ball.vy;
     scoreboard.innerText = (`${score}`)
@@ -95,23 +130,32 @@ const ball = {
         ball.vy = -ball.vy
     }
 
-    if ((ball.y <= block.y + block.height + ball.radius && ball.y >= block.y - ball.radius) && ball.x >= block.x && ball.x <= block.x + block.width){
+    
 
-        ball.vy = -ball.vy
-        block.width = 0
-        block.height = 0
-        score+=1
-        scoreboard.innerText = (`${score}`)
-        
-    }
+    /* for (let c = 0; c < columnCount; c++) {
+        for (let r = 0; r < rowCount; r++) {
+            let b = blocks[c][r];    
+            if (b.status == 1) {
+                if ((ball.y <= blockY + blockHeight + ball.radius && ball.y >= blockY - ball.radius) && ball.x >= blockX && ball.x <= blockX + blockWidth){
+
+                ball.vy = -ball.vy
+                b.status = 0;
+                score+=1
+                scoreboard.innerText = (`${score}`)
+                }
+            }
+        }
+    } */
 
     animation = window.requestAnimationFrame(draw);
+
     
-    
+      
   };
 
-  
 
+
+  
    window.addEventListener("keydown", function (event) {
     if (event.defaultPrevented) {
       return; // Do nothing if the event was already processed
@@ -134,14 +178,9 @@ const ball = {
   }, true);
 
   
-  canvas.addEventListener('click', function(e) {
+  canvas.addEventListener('click', function() {
     if (!running) { 
     animation = window.requestAnimationFrame(draw);
     running = true;
     }
   });
-
-  
-
-  
-  ball.draw();

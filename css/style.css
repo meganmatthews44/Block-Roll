@@ -11,8 +11,9 @@
     margin-bottom: 20px;
 }
 
-#click {
+.instructions {
     margin-bottom: 20px;
+    font-size: 18px;
 }
 
 #scoreboard {
