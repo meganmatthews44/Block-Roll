@@ -1,9 +1,25 @@
+// VARIABLES
+
+// Create variable for canvas element in HTML
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
+// variable to run animation and check if animation is running 
+
 let animation;
 let running = false;
+
+// create variable for DOM manipulation of score element from HTML
+
 const scoreboard = document.getElementById("score")
+
+// create variable for score which we will change when each block is hit 
+
 let score = 0
+
+// variables to draw blocks 
+
 const rowCount = 4
 const columnCount = 6
 let blockWidth = 55
@@ -14,6 +30,48 @@ const blockLeft = 40
 let blockX;
 let blockY;
 
+// created ball array, also holds function to draw ball in canvas when game is started 
+
+const ball = {
+    x: 350,
+    y: 315,
+    vx: -1,
+    vy: -2,
+    radius: 10,
+    color: 'pink',
+    draw: function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.closePath();
+    }
+  };
+
+  // created paddle array, also holds function to draw paddle in canvas
+
+   const paddle = {
+       height: 10,
+       width: 50,
+       x: 225,
+       y: 325, // does not change
+       color: 'lightgreen',
+       draw: function() {
+           ctx.beginPath();
+           ctx.rect(this.x, this.y, this.width, this.height);
+           ctx.fillStyle = this.color;
+           ctx.fill();
+           ctx.closePath();
+           
+       }
+
+   };
+
+   paddle.draw();
+
+// create blocks array based on number of columns and rows 
+// block array will hold x axis, y axis, and status of each block
+
 let blocks = [];
 for(let c = 0; c < columnCount; c++) {
     blocks[c] = [];
@@ -21,6 +79,11 @@ for(let c = 0; c < columnCount; c++) {
         blocks[c][r] = {x: 0, y: 0, status: 1};
     }
 }
+
+// FUNCTIONS
+
+
+// Function to erase blocks when hit by ball
 
 const eraseBlocks = function() {
     for (let c = 0; c < columnCount; c++) {
@@ -50,12 +113,14 @@ const eraseBlocks = function() {
     }
   };
 
+// Function to draw bricks once game is started   
+
 const drawBricks = function() {
     for(let c = 0; c < columnCount; c++) {
         for(let r = 0; r < rowCount; r++) {
             if(blocks[c][r].status === 1) {
-                blockX = (c * (blockWidth + blockPadding)) +blockLeft;
-                blockY = (r * (blockHeight + blockPadding)) +blockTop;
+                blockX = (c * (blockWidth + blockPadding)) + blockLeft;
+                blockY = (r * (blockHeight + blockPadding)) + blockTop;
                 blocks[c][r].x = blockX;
                 blocks[c][r].y = blockY;
                 ctx.beginPath();
@@ -68,43 +133,8 @@ const drawBricks = function() {
     }
 }
 
-
-
-const ball = {
-    x: 350,
-    y: 315,
-    vx: -1,
-    vy: -2,
-    radius: 10,
-    color: 'pink',
-    draw: function() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.closePath();
-    }
-  };
-
-   const paddle = {
-       height: 10,
-       width: 50,
-       x: 350,
-       y: 325, // does not change
-       color: 'lightgreen',
-       draw: function() {
-           ctx.beginPath();
-           ctx.rect(this.x, this.y, this.width, this.height);
-           ctx.fillStyle = this.color;
-           ctx.fill();
-           ctx.closePath();
-           
-       }
-
-   };
-
-   paddle.draw();
-
+// function that is called to play game, when click event happens
+// moves ball direction when hit walls, hits paddle, or ends game if ball falls to bottom screen 
 
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -116,6 +146,7 @@ const ball = {
     ball.y += ball.vy;
     scoreboard.innerText = (`${score}`)
 
+    // end game if ball falls to bottom off screen
 
     if(ball.y + ball.vy > canvas.height) {
         alert('You lose!')
@@ -123,14 +154,21 @@ const ball = {
         clearInterval(interval);
     }
 
-    //To do: add a box that pops up with the message, not the alert, allow to clear and start over
+    // NOTE: To do: add a box that pops up with the message, not the alert, allow to clear and start over
+
+    // reverses ball direction if ball hits top of screen
 
     if(ball.y + ball.vy < ball.radius) {
         ball.vy = -ball.vy;
     }
+
+    // reverses ball direction if ball hits sides of screen
+
     if(ball.x + ball.vx > canvas.width-ball.radius || ball.x +ball.vx < ball.radius) {
         ball.vx = -ball.vx;
     } 
+
+    // Stops paddle from leaving sides of screen
 
     if (paddle.x <= 0) {
         paddle.x = 0
@@ -138,6 +176,8 @@ const ball = {
     if (paddle.x >= (canvas.width-paddle.width)) {
         paddle.x = (canvas.width-paddle.width)
     }
+
+    // reverse direction of ball when ball hits paddle 
 
     if (ball.y === (paddle.y - ball.radius) && (ball.x >= paddle.x) && (ball.x <= (paddle.x + paddle.width)))  {
         ball.vy = -ball.vy
@@ -148,8 +188,9 @@ const ball = {
     
   };
 
+// EVENT LISTENERS 
 
-
+    // event listener to move paddle from left to right with arrow keys *found answer on Stack Overflow
   
    window.addEventListener("keydown", function (event) {
     if (event.defaultPrevented) {
@@ -159,10 +200,10 @@ const ball = {
     switch (event.key) {
       
       case "ArrowLeft":
-        paddle.x -= 10
+        paddle.x -= 15
         break;
       case "ArrowRight":
-        paddle.x += 10
+        paddle.x += 15
         break;
       
       default:
@@ -172,6 +213,7 @@ const ball = {
     event.preventDefault();
   }, true);
 
+  // event listener to start animation and game when clicked
   
   canvas.addEventListener('click', function() {
     if (!running) { 
