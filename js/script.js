@@ -22,14 +22,37 @@ for(let c = 0; c < columnCount; c++) {
     }
 }
 
+const eraseBlocks = function() {
+    for (let c = 0; c < columnCount; c++) {
+        for (let r = 0; r < rowCount; r++) { 
+            let b = blocks[c][r];
+            console.log(blocks[c][r].status, "before") 
+            if (blocks[c][r].status === 1) {
+                if ((ball.y <= b.y + blockHeight + ball.radius && ball.y >= b.y - ball.radius) && ball.x >= b.x && ball.x <= b.x + blockWidth){
+
+                ball.vy = -ball.vy
+                blocks[c][r].status = 0;
+                score+=1
+                scoreboard.innerText = (`${score}`)
+                console.log(blocks[c][r].status, "after")
+                }
+            }
+            if (blocks[c][r].status === 0) {
+                b.blockY = 0;
+                b.blockX = 0;
+            }
+        }
+    }
+  };
+
 const drawBricks = function() {
     for(let c = 0; c < columnCount; c++) {
         for(let r = 0; r < rowCount; r++) {
             if(blocks[c][r].status == 1) {
                 blockX = (c * (blockWidth + blockPadding)) +blockLeft;
                 blockY = (r * (blockHeight + blockPadding)) +blockTop;
-                blocks[c][r].x = 0;
-                blocks[c][r].y = 0;
+                blocks[c][r].x = blockX;
+                blocks[c][r].y = blockY;
                 ctx.beginPath();
                 ctx.rect(blockX, blockY, blockWidth, blockHeight);
                 ctx.fillStyle = "lightblue";
@@ -40,22 +63,7 @@ const drawBricks = function() {
     }
 }
 
-const eraseBlocks = function() {
-    for (let c = 0; c < columnCount; c++) {
-        for (let r = 0; r < rowCount; r++) { 
-            let b = blocks[c][r]  
-            if (b.status == 1) {
-                if ((ball.y <= blockY + blockHeight + ball.radius && ball.y >= blockY - ball.radius) && ball.x >= blockX && ball.x <= blockX + blockWidth){
 
-                ball.vy = -ball.vy
-                b.status = 0;
-                score+=1
-                scoreboard.innerText = (`${score}`)
-                }
-            }
-        }
-    }
-  };
 
 const ball = {
     x: 350,
@@ -130,27 +138,9 @@ const ball = {
         ball.vy = -ball.vy
     }
 
-    
-
-    /* for (let c = 0; c < columnCount; c++) {
-        for (let r = 0; r < rowCount; r++) {
-            let b = blocks[c][r];    
-            if (b.status == 1) {
-                if ((ball.y <= blockY + blockHeight + ball.radius && ball.y >= blockY - ball.radius) && ball.x >= blockX && ball.x <= blockX + blockWidth){
-
-                ball.vy = -ball.vy
-                b.status = 0;
-                score+=1
-                scoreboard.innerText = (`${score}`)
-                }
-            }
-        }
-    } */
-
     animation = window.requestAnimationFrame(draw);
 
     
-      
   };
 
 
