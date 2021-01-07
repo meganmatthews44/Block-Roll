@@ -22,6 +22,7 @@ let score = 0
 
 const rowCount = 4
 const columnCount = 6
+const numToWin = rowCount * columnCount
 let blockWidth = 55
 let blockHeight = 25
 const blockPadding = 20
@@ -29,6 +30,7 @@ const blockTop = 40
 const blockLeft = 40
 let blockX;
 let blockY;
+
 
 // created ball array, also holds function to draw ball in canvas when game is started 
 
@@ -97,25 +99,29 @@ const eraseBlocks = function() {
                 score+=1
                 scoreboard.innerText = (`${score}`)
 
+
                 if (ball.color === "pink") {
                     ball.color = "blue"
                 }  else {
                     ball.color = "pink"
-                }    
+                }   
+                
+                if (score == numToWin) {
+                    alert('You have hit all the blocks! YOU WIN!')
+                    document.location.reload();
+                    clearInterval(interval);
+                }
                
                 }
             }
-            if (b.status === 0) {
-                b.blockY = 0;
-                b.blockX = 0;
-            }
+        
         }
     }
   };
 
 // Function to draw bricks once game is started   
 
-const drawBricks = function() {
+const drawBlocks = function() {
     for(let c = 0; c < columnCount; c++) {
         for(let r = 0; r < rowCount; r++) {
             if(blocks[c][r].status === 1) {
@@ -138,7 +144,7 @@ const drawBricks = function() {
 
   function draw() {
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    drawBricks();
+    drawBlocks();
     ball.draw();
     paddle.draw();
     eraseBlocks();
@@ -149,7 +155,7 @@ const drawBricks = function() {
     // end game if ball falls to bottom off screen
 
     if(ball.y + ball.vy > canvas.height) {
-        alert('You lose!')
+        alert('Uh oh! Your ball touched the ground. You lose!')
         document.location.reload();
         clearInterval(interval);
     }
@@ -213,7 +219,7 @@ const drawBricks = function() {
     event.preventDefault();
   }, true);
 
-  // event listener to start animation and game when clicked
+  // event listener to start animation and the game when clicked
   
   canvas.addEventListener('click', function() {
     if (!running) { 
