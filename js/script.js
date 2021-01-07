@@ -20,8 +20,8 @@ let score = 0
 
 // variables to draw blocks 
 
-const rowCount = 4
-const columnCount = 6
+const rowCount = 5
+const columnCount = 10
 const numToWin = rowCount * columnCount
 let blockWidth = 55
 let blockHeight = 25
@@ -37,7 +37,7 @@ let blockY;
 const ball = {
     x: 350,
     y: 315,
-    vx: -1,
+    vx: -2,
     vy: -2,
     radius: 10,
     color: '#C40BE5',
@@ -54,9 +54,9 @@ const ball = {
 
    const paddle = {
        height: 10,
-       width: 50,
+       width: 70,
        x: 225,
-       y: 325, // does not change
+       y: 525, // does not change
        color: '#08F946',
        draw: function() {
            ctx.beginPath();
