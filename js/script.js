@@ -94,23 +94,26 @@ const eraseBlocks = function() {
             if (b.status === 1) {
                 if ((ball.y <= b.y + blockHeight + ball.radius && ball.y >= b.y - ball.radius) && ball.x >= b.x && ball.x <= b.x + blockWidth){
 
-                ball.vy = -ball.vy
-                b.status = 0;
-                score+=1
-                scoreboard.innerText = (`${score}`)
+                    ball.vy = -ball.vy
+                    b.status = 0;
+                    score+=1
+                    scoreboard.innerText = (`${score}`)
 
-
-                if (ball.color === "pink") {
-                    ball.color = "blue"
-                }  else {
-                    ball.color = "pink"
-                }   
+                    // change color of ball each time it hits a block
                 
-                if (score == numToWin) {
-                    alert('You have hit all the blocks! YOU WIN!')
-                    document.location.reload();
-                    clearInterval(interval);
-                }
+                    if (ball.color === "pink") {
+                        ball.color = "blue"
+                    }  else {
+                        ball.color = "pink"
+                    }   
+
+                    // Win alert when all blocks have been hit 
+                
+                    if (score == numToWin) {
+                        alert('You have hit all the blocks! YOU WIN!')
+                        document.location.reload();
+                        clearInterval(interval);
+                    }
                
                 }
             }
@@ -155,7 +158,7 @@ const drawBlocks = function() {
     // end game if ball falls to bottom off screen
 
     if(ball.y + ball.vy > canvas.height) {
-        alert('Uh oh! Your ball touched the ground. You lose!')
+        alert(`Uh oh! Your ball touched the ground. You lose! Score: ${score}`)
         document.location.reload();
         clearInterval(interval);
     }
