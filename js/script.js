@@ -40,7 +40,7 @@ const ball = {
     vx: -1,
     vy: -2,
     radius: 10,
-    color: 'pink',
+    color: '#C40BE5',
     draw: function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -57,7 +57,7 @@ const ball = {
        width: 50,
        x: 225,
        y: 325, // does not change
-       color: 'lightgreen',
+       color: '#08F946',
        draw: function() {
            ctx.beginPath();
            ctx.rect(this.x, this.y, this.width, this.height);
@@ -101,10 +101,10 @@ const eraseBlocks = function() {
 
                     // change color of ball each time it hits a block
                 
-                    if (ball.color === "pink") {
-                        ball.color = "blue"
+                    if (ball.color === "#C40BE5") {
+                        ball.color = "#FF179F "
                     }  else {
-                        ball.color = "pink"
+                        ball.color = "#C40BE5"
                     }   
 
                     // Win alert when all blocks have been hit 
@@ -134,7 +134,7 @@ const drawBlocks = function() {
                 blocks[c][r].y = blockY;
                 ctx.beginPath();
                 ctx.rect(blockX, blockY, blockWidth, blockHeight);
-                ctx.fillStyle = "lightblue";
+                ctx.fillStyle = "#10BAF9";
                 ctx.fill();
                 ctx.closePath();
             }
@@ -230,3 +230,5 @@ const drawBlocks = function() {
     running = true;
     }
   });
+
+  
