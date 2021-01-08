@@ -21,9 +21,9 @@ let score = 0
 // variables to draw blocks 
 
 const rowCount = 5
-const columnCount = 10
+const columnCount = 8
 const numToWin = rowCount * columnCount
-let blockWidth = 55
+let blockWidth = 54
 let blockHeight = 25
 const blockPadding = 20
 const blockTop = 40
@@ -35,7 +35,7 @@ let blockY;
 // created ball array, also holds function to draw ball in canvas when game is started 
 
 const ball = {
-    x: 350,
+    x: 450,
     y: 315,
     vx: -2,
     vy: -2,
@@ -55,7 +55,7 @@ const ball = {
    const paddle = {
        height: 10,
        width: 70,
-       x: 225,
+       x: 365,
        y: 525, // does not change
        color: '#08F946',
        draw: function() {
