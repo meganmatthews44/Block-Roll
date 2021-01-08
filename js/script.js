@@ -54,9 +54,9 @@ const ball = {
 
    const paddle = {
        height: 10,
-       width: 70,
+       width: 50,
        x: 365,
-       y: 525, // does not change
+       y: 475, // does not change
        color: '#08F946',
        draw: function() {
            ctx.beginPath();
