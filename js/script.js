@@ -214,10 +214,8 @@ const drawBlocks = function() {
   // Function to close modal on button click
 
   const closeModal = function() {
-    console.log('button has been hit')
     $('#win-lose-modal').remove();
     document.location.reload();
-    // clearInterval(interval);
 }
 
 // EVENT LISTENERS 
@@ -232,10 +230,10 @@ const drawBlocks = function() {
     switch (event.key) {
       
       case "ArrowLeft":
-        paddle.x -= 15
+        paddle.x -= 20
         break;
       case "ArrowRight":
-        paddle.x += 15
+        paddle.x += 20
         break;
       
       default:
