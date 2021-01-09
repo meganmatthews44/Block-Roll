@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://cdn.hipwallpaper.com/m/71/20/OmL1gF.jpg");
+    background-image: url("https://www.wallpapertip.com/wmimgs/10-106555_colourful-background-for-graphics.jpg");
     
 }
 
@@ -73,8 +73,11 @@ header {
 }
 
 footer {
-    height: 15px;
     background-color: black;
     color:lightgray;
     font-size: 8px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:15px;
 }
