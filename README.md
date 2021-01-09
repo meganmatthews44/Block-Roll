@@ -28,7 +28,14 @@ If the ball falls to the bottom of the game screen, the game is over.
 - Used functions to start game play, draw the blocks, detect ball collision with walls, paddle and blocks, and alert customer of game won or lost 
 - Used event listeners to start game play, move paddle left and right, and exit game won/lost modal and refresh game
 - Used DOM manipulation to show adjusted score each time a block is hit and when game has ended
+- Created game instruction modal and won/lost modal using Bootstrap
 - Used CSS to style game
+
+## Unsolved Problems
+
+- Ball seems to go the same direction no matter what part of the paddle it hits. Would love to add logic that adjusts the angle of the ball depending on where on the paddle it hits.
+- Speed up the ball as the number of existing blocks gets lower, making the game more challenging for the player. 
+- Create a mobile friendly version.
 
 ## Resources
 
