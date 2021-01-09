@@ -56,7 +56,7 @@
             <p>If you hit all the bricks, you win the game!</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="ready">Ready?</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="ready">Ready!</button>
         </div>
       </div>
     </div>
@@ -74,5 +74,26 @@
     <footer>
 
     </footer>
+
+    <div class="modal" tabindex="-1" role="dialog" id="win-lose-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="win-lose-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="win-lose-message"></p>
+            <p id="win-lose-score"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="play-again-btn">Play again!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </body>
 </html>

@@ -48,6 +48,11 @@ header {
     background-color: #ED4D34;
 }
 
+#play-again-btn {
+    font-family: 'Bungee Inline', cursive;
+    background-color: #ED4D34;
+}
+
 .instructions {
     margin-top: 50px;
     font-size: 18px;

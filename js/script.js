@@ -18,6 +18,13 @@ const scoreboard = document.getElementById("score")
 
 let score = 0
 
+// variables for win/lose modal
+
+const winLoseTitle = document.getElementById("win-lose-title")
+const winLoseMessage = document.getElementById("win-lose-message")
+const winLoseScore = document.getElementById("win-lose-score")
+
+
 // variables to draw blocks 
 
 const rowCount = 5
@@ -110,9 +117,11 @@ const eraseBlocks = function() {
                     // Win alert when all blocks have been hit 
                 
                     if (score == numToWin) {
-                        alert('You have hit all the blocks! YOU WIN!')
-                        document.location.reload();
-                        clearInterval(interval);
+                        winLoseTitle.innerText = (`You Win!`)
+                        winLoseMessage.innerText = (`You hit all the blocks!`)
+                        winLoseScore.innerText =(`Score: ${score}`)
+                        $('#win-lose-modal').modal({ keyboard: true }) 
+                        $('#win-lose-modal').modal('show')
                     }
                
                 }
@@ -158,9 +167,12 @@ const drawBlocks = function() {
     // end game if ball falls to bottom off screen
 
     if(ball.y + ball.vy > canvas.height) {
-        alert(`Uh oh! Your ball touched the ground. You lose! Score: ${score}`)
-        document.location.reload();
-        clearInterval(interval);
+        winLoseTitle.innerText = (`Game over! You lose!`)
+        winLoseMessage.innerText = (`Uh Oh! Looks like your ball hit the ground!`)
+        winLoseScore.innerText =(`Score: ${score}`)
+        $('#win-lose-modal').modal({ keyboard: true }) 
+        $('#win-lose-modal').modal('show') 
+        
     }
 
     // NOTE: To do: add a box that pops up with the message, not the alert, allow to clear and start over
