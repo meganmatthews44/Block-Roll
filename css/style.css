@@ -16,6 +16,12 @@ header {
 #title {
     margin-top: 10px;
     margin-bottom: 20px;
+    font-family: 'Bungee Shade', cursive;
+    font-size: 50px;
+}
+
+.start {
+    font-family: 'Bungee Inline', cursive;
 }
 
 #btn-instructions {
@@ -23,11 +29,29 @@ header {
     border: 1px solid #15C7F4;
     margin: 40px;
     font-size: 20px;
+    font-family: 'Bungee Inline', cursive;
+}
+
+.modal {
+    font-family: 'Roboto', sans-serif;
+    
+    
+}
+
+.modal-title {
+    font-family: 'Bungee Inline', cursive;
+    color: #ED4D34;
+}
+
+#ready {
+    font-family: 'Bungee Inline', cursive;
+    background-color: #ED4D34;
 }
 
 .instructions {
     margin-top: 50px;
     font-size: 18px;
+    font-family: 'Bungee Inline', cursive;
 }
 
 #scoreboard {
@@ -35,6 +59,7 @@ header {
     margin-top: 50px;
     margin-bottom: 50px;
     font-size: 30px;
+    font-family: 'Bungee Outline', cursive;
     color: white;
     text-align: center;
     width: 200px;
