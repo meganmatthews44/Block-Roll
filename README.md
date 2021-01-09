@@ -12,13 +12,13 @@
 
 ## User Story
 
-    Player clicks in game screen to start the game. The blocks will be created and ball will start moving.
+Player clicks in game screen to start the game. The blocks will be created and ball will start moving.
 
-    Player will need to place the paddle in the correct position by using the left and right arrow keys on their keyboard to make sure they 1) do not allow the ball to fall to the bottom of the game screen and 2) angle it correctly to hit the existing blocks in the game screen.
+Player will need to place the paddle in the correct position by using the left and right arrow keys on their keyboard to make sure they 1) do not allow the ball to fall to the bottom of the game screen and 2) angle it correctly to hit the existing blocks in the game screen.
 
-    Any blocks that are hit will disappear and the player's score will go up by one point. Once there are no blocks left, the winner has won the game. 
+Any blocks that are hit will disappear and the player's score will go up by one point. Once there are no blocks left, the winner has won the game. 
 
-    If the ball falls to the bottom of the game screen, the game is over. 
+If the ball falls to the bottom of the game screen, the game is over. 
 
 ## Approach Taken
 
