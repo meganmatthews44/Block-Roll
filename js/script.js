@@ -23,6 +23,9 @@ let score = 0
 const winLoseTitle = document.getElementById("win-lose-title")
 const winLoseMessage = document.getElementById("win-lose-message")
 const winLoseScore = document.getElementById("win-lose-score")
+const playAgainBtn = document.getElementById("play-again-btn")
+const xBtn = document.getElementById("x-btn")
+
 
 
 // variables to draw blocks 
@@ -164,7 +167,7 @@ const drawBlocks = function() {
     ball.y += ball.vy;
     scoreboard.innerText = (`${score}`)
 
-    // end game if ball falls to bottom off screen
+    // end game if ball falls to bottom off screen, alert of game over
 
     if(ball.y + ball.vy > canvas.height) {
         winLoseTitle.innerText = (`Game over! You lose!`)
@@ -175,7 +178,6 @@ const drawBlocks = function() {
         
     }
 
-    // NOTE: To do: add a box that pops up with the message, not the alert, allow to clear and start over
 
     // reverses ball direction if ball hits top of screen
 
@@ -208,6 +210,15 @@ const drawBlocks = function() {
 
     
   };
+
+  // Function to close modal on button click
+
+  const closeModal = function() {
+    console.log('button has been hit')
+    $('#win-lose-modal').remove();
+    document.location.reload();
+    // clearInterval(interval);
+}
 
 // EVENT LISTENERS 
 
@@ -243,4 +254,8 @@ const drawBlocks = function() {
     }
   });
 
-  
+  // event listener to clear win/lose modal
+
+  playAgainBtn.addEventListener('click', closeModal)
+  xBtn.addEventListener('click', closeModal)
+
