@@ -178,7 +178,6 @@ const drawBlocks = function() {
         
     }
 
-
     // reverses ball direction if ball hits top of screen
 
     if(ball.y + ball.vy < ball.radius) {
