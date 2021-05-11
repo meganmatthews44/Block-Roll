@@ -2,7 +2,7 @@
 
 ## Play the Game
 
-[Block and Roll](https://meganmatthews44.github.io/)
+[Block and Roll](https://meganmatthews44.github.io/Block-Roll/)
 
 ## Technologies Used
 
